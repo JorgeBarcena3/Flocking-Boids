@@ -9,10 +9,10 @@
 *                                                                             *
 \* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#include "headers/Model2D.hpp"
-#include "headers/Scaling.hpp"
-#include "headers/Rotation.hpp"
-#include "headers/Translation.hpp"
+#include "../headers/Model2D.hpp"
+#include "../headers/Scaling.hpp"
+#include "../headers/Rotation.hpp"
+#include "../headers/Translation.hpp"
 
 using namespace sf;
 using namespace toolkit;

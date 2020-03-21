@@ -9,7 +9,7 @@
 *                                                                             *
 \* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#include "headers/Boid.hpp"
+#include "../headers/Boid.hpp"
 
 #define PI   3.1415
 #define PI2  2 * PI
@@ -30,7 +30,7 @@ FlockingSystem::Boid::Boid(
     sf::Color _color,
     Vector2f _position,
     float _translationSpeed,
-    int _vertex) : Model2D({ })
+    int _vertex) : Model2D({ }), Behavior(this)
 {
 
 
@@ -81,7 +81,7 @@ void Boid::setListOfPolygons()
 */
 void Boid::update(float delta)
 {
-
+    Behavior.update();
     set_position(position[0] + translationSpeed, position[1]);
 	Model2D::update(delta);
 };

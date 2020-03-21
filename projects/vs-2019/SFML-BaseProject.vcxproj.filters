@@ -7,57 +7,90 @@
     <Filter Include="Headers">
       <UniqueIdentifier>{246380b1-5d02-4ae8-9c0f-7b1d96cb3a4b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\Flock Behavior">
+      <UniqueIdentifier>{d50f2fe8-a6fc-4f4a-94d1-18ef77a0305e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Flock Behavior\base">
+      <UniqueIdentifier>{555006c3-1ee5-485a-b511-92fcbe3afeb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\tools">
+      <UniqueIdentifier>{e146e0d6-682e-4984-8628-68609159d08c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\code\main.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\code\Model2D.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\code\Boid.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="..\..\code\headers\Vector.hpp">
+      <Filter>Headers\tools</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\code\headers\Algorithms.hpp">
-      <Filter>Headers</Filter>
+      <Filter>Headers\tools</Filter>
     </ClInclude>
     <ClInclude Include="..\..\code\headers\Coordinates.hpp">
-      <Filter>Headers</Filter>
+      <Filter>Headers\tools</Filter>
     </ClInclude>
     <ClInclude Include="..\..\code\headers\macros.hpp">
-      <Filter>Headers</Filter>
+      <Filter>Headers\tools</Filter>
     </ClInclude>
     <ClInclude Include="..\..\code\headers\Matrix.hpp">
-      <Filter>Headers</Filter>
+      <Filter>Headers\tools</Filter>
     </ClInclude>
     <ClInclude Include="..\..\code\headers\Model2D.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\code\headers\Point.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\code\headers\Rotation.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\code\headers\Scaling.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\code\headers\Transformation.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\code\headers\Translation.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\code\headers\types.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\code\headers\Vector.hpp">
-      <Filter>Headers</Filter>
+      <Filter>Headers\tools</Filter>
     </ClInclude>
     <ClInclude Include="..\..\code\headers\Boid.hpp">
-      <Filter>Headers</Filter>
+      <Filter>Headers\tools</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\code\headers\Point.hpp">
+      <Filter>Headers\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\headers\Rotation.hpp">
+      <Filter>Headers\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\headers\Scaling.hpp">
+      <Filter>Headers\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\headers\Transformation.hpp">
+      <Filter>Headers\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\headers\Translation.hpp">
+      <Filter>Headers\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\headers\types.hpp">
+      <Filter>Headers\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\headers\FlockBehavior.hpp">
+      <Filter>Headers\Flock Behavior\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\headers\Coeshion.hpp">
+      <Filter>Headers\Flock Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\headers\Alignment.hpp">
+      <Filter>Headers\Flock Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\headers\Avoidance.hpp">
+      <Filter>Headers\Flock Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\headers\ComponentBehavior.hpp">
+      <Filter>Headers\Flock Behavior</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\code\source\Alignment.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\source\Avoidance.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\source\Boid.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\source\Coeshion.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\source\main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\source\Model2D.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

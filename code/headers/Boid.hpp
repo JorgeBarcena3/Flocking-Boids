@@ -15,6 +15,7 @@
 
 #include "Model2D.hpp"
 #include <SFML/Graphics.hpp>
+#include "ComponentBehavior.hpp"
 
 
 using namespace toolkit;
@@ -26,6 +27,8 @@ namespace FlockingSystem
     {
 
     public:
+
+        ComponentBehavior            Behavior;               // Determina como se comporta el Boid
 
         static std::vector<Boid*>    instances;              //Instancias de los boids
 

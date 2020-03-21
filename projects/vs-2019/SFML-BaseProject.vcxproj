@@ -87,14 +87,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\code\main.cpp" />
-    <ClCompile Include="..\..\code\Model2D.cpp" />
-    <ClCompile Include="..\..\code\Boid.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\..\code\headers\Algorithms.hpp" />
+    <ClInclude Include="..\..\code\headers\Alignment.hpp" />
+    <ClInclude Include="..\..\code\headers\Avoidance.hpp" />
+    <ClInclude Include="..\..\code\headers\Coeshion.hpp" />
+    <ClInclude Include="..\..\code\headers\ComponentBehavior.hpp" />
     <ClInclude Include="..\..\code\headers\Coordinates.hpp" />
     <ClInclude Include="..\..\code\headers\Boid.hpp" />
+    <ClInclude Include="..\..\code\headers\FlockBehavior.hpp" />
     <ClInclude Include="..\..\code\headers\macros.hpp" />
     <ClInclude Include="..\..\code\headers\Matrix.hpp" />
     <ClInclude Include="..\..\code\headers\Model2D.hpp" />
@@ -105,6 +105,14 @@
     <ClInclude Include="..\..\code\headers\Translation.hpp" />
     <ClInclude Include="..\..\code\headers\types.hpp" />
     <ClInclude Include="..\..\code\headers\Vector.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\code\source\Alignment.cpp" />
+    <ClCompile Include="..\..\code\source\Avoidance.cpp" />
+    <ClCompile Include="..\..\code\source\Boid.cpp" />
+    <ClCompile Include="..\..\code\source\Coeshion.cpp" />
+    <ClCompile Include="..\..\code\source\main.cpp" />
+    <ClCompile Include="..\..\code\source\Model2D.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
