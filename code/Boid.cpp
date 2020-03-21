@@ -27,7 +27,6 @@ std::vector<Boid*> Boid::instances = {};
 */
 FlockingSystem::Boid::Boid(
     float _radius,
-    float _angularSpeed,
     sf::Color _color,
     Vector2f _position,
     float _translationSpeed,
@@ -83,7 +82,7 @@ void Boid::setListOfPolygons()
 void Boid::update(float delta)
 {
 
-    set_position(position[0] + 1, position[1]);
+    set_position(position[0] + translationSpeed, position[1]);
 	Model2D::update(delta);
 };
 

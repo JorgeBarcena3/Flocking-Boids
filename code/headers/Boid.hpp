@@ -45,7 +45,6 @@ namespace FlockingSystem
         */
         Boid(
             float             _radius                                                  ,//Radio
-            float             _angularSpeed                                            ,//Velocidad de giro sobre si mismo
             sf::Color         _color                                                   ,//Color
             Vector2f          _position                                                ,// Position
             float             _translationSpeed        = 1                             ,//Velocidad de translacion

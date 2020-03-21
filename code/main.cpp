@@ -28,7 +28,7 @@ int main()
 
 	bool running = true;
 
-	Boid* A = new Boid(25, 0, sf::Color::Blue, {450, 300});
+	Boid* A = new Boid(25, sf::Color::Red, {450, 300}, 1);
 
 
 	do
