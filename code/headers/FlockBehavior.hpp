@@ -15,7 +15,6 @@
 
 namespace FlockingSystem
 {
-
     class Boid;
 
     class FlockBehavior

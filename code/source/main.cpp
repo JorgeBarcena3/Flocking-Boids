@@ -10,24 +10,23 @@
 \* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "../headers/Boid.hpp"
+#include "../headers/MathHelper.hpp"
 #include <vector>
 #include <stdlib.h>     /* srand, rand */
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
+#define WIDTH  1024
+#define HEIGHT 720
+
+
 using namespace sf;
 using namespace FlockingSystem;
 
 
-float generateRandom(double M, double N)
-{
-    return M + (rand() / (RAND_MAX / (N - M)));
-}
-
-
 int main()
 {
-    RenderWindow window(VideoMode(900, 600), "Flocking Boids - Jorge Barcena", sf::Style::Default, ContextSettings(32));
+    RenderWindow window(VideoMode(WIDTH, HEIGHT), "Flocking Boids - Jorge Barcena", sf::Style::Default, ContextSettings(32));
 
     window.setVerticalSyncEnabled(true);
 
@@ -38,48 +37,22 @@ int main()
 
     std::vector<Boid*> agents;
 
-    for (size_t i = 0; i < 1000; i++)
+    BoidInfo infoBoid(25, 50, 24, 0.2, 5);
+
+    for (size_t i = 0; i < 200; i++)
     {
-        agents.push_back( new Boid
-            (
-                3,
-                sf::Color(255,255, generateRandom(100.0f, 255.0f), 255),
-                { generateRandom(-1.f,1.0f), generateRandom(-1.f,1.f)},
-                { generateRandom(0, 900), generateRandom(0, 600) },
-                10,
-                1,
-                8
-            )
+        agents.push_back(new Boid
+        (
+            6,
+            sf::Color::White,
+            { MathHelper::generateRandom(0, WIDTH), MathHelper::generateRandom(0, HEIGHT) },
+            { WIDTH, HEIGHT },
+            infoBoid,
+            3
+        )
         );
 
     }
-
-    //agents.push_back(new Boid
-    //(
-    //    50,
-    //    sf::Color::Red,
-    //    { generateRandom(-1.f,1.0f), generateRandom(-1.f,1.f) },
-    //    { generateRandom(0, 900), generateRandom(0, 600) },
-    //    100,
-    //    4,
-    //    6
-    //)
-    //);
-    //
-    //agents.push_back(new Boid
-    //(
-    //    50,
-    //    sf::Color(255, 255, generateRandom(100.0f, 255.0f), 255),
-    //    { generateRandom(-1.f,1.0f), generateRandom(-1.f,1.f) },
-    //    { generateRandom(0, 900), generateRandom(0, 600) },
-    //    1,
-    //    4,
-    //    4
-    //)
-    //);
-
-
-
 
 
     do

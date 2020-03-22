@@ -11,7 +11,6 @@
 #ifndef MATHHELPER_HEADER
 #define MATHHELPER_HEADER
 
-#include "FlockBehavior.hpp"
 #include "Vector.hpp"
 
 
@@ -67,6 +66,38 @@ namespace FlockingSystem
            
             return sqrt( magnitude(&A) );
         }
+        
+
+        static float generateRandom(double M, double N)
+        {
+            return M + (rand() / (RAND_MAX / (N - M)));
+        }
+
+        static float generateRandom(int M, int N)
+        {
+            return M + (rand() / (RAND_MAX / (N - M)));
+        }
+        
+        static void setMag(toolkit::Vector2f& vec, float newMag)
+        {
+            float mag = magnitude(&vec);
+
+            vec[0] = vec[0] * newMag / mag;
+            vec[1] = vec[1] * newMag / mag;
+        } 
+        
+        static void limit(toolkit::Vector2f& vec, float max)
+        {
+            float mag = magnitude(&vec);
+
+            if (mag > max)
+            {
+                setMag(vec, max);
+            }
+
+        }
+        
+
 
     };
 

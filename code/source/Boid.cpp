@@ -27,28 +27,21 @@ std::vector<Boid*> Boid::instances = {};
 * Divide la esfera en vertices de igual distancia
 */
 FlockingSystem::Boid::Boid(
-    float _radius,
-    sf::Color _color,
-    Vector2f _direction,
-    Vector2f _startPosition,
-    float _visibleRadius,
-    float _translationSpeed,
-    int _vertex) : Model2D({ }), Behavior(this)
+    float             _radius,
+    sf::Color         _color,
+    Vector2f          _startPosition,
+    toolkit::Vector2i _Window_size,
+    BoidInfo          _info,
+    int               _vertex) : Model2D({ }), boidInfo(_info)
 {
 
-
-    radius = _radius;                          // Radio
-    vertex = _vertex;                          // Numero de vertices
-    set_color(_color);                         // Color que adopta
-    translationSpeed = _translationSpeed;      // Velocidad de translacion
-    set_position(_startPosition[0], _startPosition[1]);
-    visibleRadius = radius + _visibleRadius;
-    direction = _direction;
-    setListOfPolygons();                       // Creamos la esfera basandonos en los vertices
-
-    radiusInfo.squareMaxSpeed = _translationSpeed * _translationSpeed;
-    radiusInfo.squareNeighborRadius = visibleRadius * visibleRadius;
-    radiusInfo.squareAvoidanceRadius = radiusInfo.squareNeighborRadius * 2 * 2;
+    behavior = new ComponentBehavior(this);
+    radius = _radius;                                    // Radio
+    vertex = _vertex;                                    // Numero de vertices
+    set_color(_color);                                   // Color que adopta
+    set_position(_startPosition[0], _startPosition[1]);  // Posicionamos el boid en esa posicion
+    window_size = _Window_size;                          // Tamaño de la pantalla
+    setListOfPolygons();                                 // Creamos la esfera basandonos en los vertices
 
 
     /* Inicializamos los vertices */
@@ -65,7 +58,9 @@ FlockingSystem::Boid::Boid(
 
     transformed_vertices.resize(local_vertices.size());
 
-    Boid::instances.push_back(this); //Añadimos el objeto a la lista de entidades
+    Boid::instances.push_back(this);                     //Añadimos el objeto a la lista de entidades
+
+
 
 }
 
@@ -90,44 +85,30 @@ void Boid::setListOfPolygons()
 */
 void Boid::update(float delta)
 {
-    //fixLimits();
+    //Restablecemos los limites
+    limits();
 
-    getAgentsInRange();
+    behavior->calculateMove();
 
-    toolkit::Vector2f move = Behavior.calculateMove();
+    Vector2f newPows = position;
+    newPows += boidInfo.velocity;
 
-    move[0] *= translationSpeed;
-    move[1] *= translationSpeed;
+    boidInfo.velocity += boidInfo.aceleration;
+    MathHelper::limit( boidInfo.velocity, boidInfo.maxSpeed );
+    boidInfo.aceleration *= 0;
 
-    if (MathHelper::sqrtMagnitude(move) > radiusInfo.squareMaxSpeed)
-    {
-        MathHelper::normalize(&move);
-        move[0] *= translationSpeed;
-        move[1] *= translationSpeed;
-    }
-
-    direction += move;
-    MathHelper::normalize(&direction);
-
-    direction[0] *= translationSpeed;
-    direction[1] *= translationSpeed;
-
-    /*  agent.Move(move);
-      MathHelper::normalize(&direction);*/
-
-
-    set_position(position[0] + direction[0], position[1] + direction[1]);
+    set_position(newPows[0], newPows[1]);
 
     Model2D::update(delta);
 };
 
-void Boid::fixLimits()
+void Boid::limits()
 {
     if (position[0] < 0)
     {
-        position[0] = 900;
+        position[0] = window_size[0];
     }
-    else if (position[0] > 900)
+    else if (position[0] > window_size[0])
     {
         position[0] = 0;
 
@@ -135,44 +116,10 @@ void Boid::fixLimits()
 
     if (position[1] < 0)
     {
-        position[1] = 600;
+        position[1] = window_size[1];
     }
-    else if (position[1] > 600)
+    else if (position[1] > window_size[1])
     {
         position[1] = 0;
     }
 }
-
-void Boid::getAgentsInRange()
-{
-
-    neighboursBoids.clear();
-
-    for (Boid* agent : Boid::instances)
-    {
-
-        if (agent != this)
-        {
-            Vector2f agentFixedPosition = (*agent).position;
-           
-
-            float distance = MathHelper::distance(this->position, agentFixedPosition);
-
-            if (distance < visibleRadius)
-            {
-                neighboursBoids.push_back(agent);
-            }
-
-        }
-
-
-
-    }
-
-    int r = 12 * neighboursBoids.size();
-    set_color(sf::Color(255, 0, 0, 255));
-
-
-
-}
-

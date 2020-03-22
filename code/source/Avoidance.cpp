@@ -5,32 +5,35 @@
 toolkit::Vector2f FlockingSystem::Avoidance::calculateMove(Boid* a)
 {
 
-    if (a->neighboursBoids.size() == 0)
-        return toolkit::Vector2f({ 0,0 });
+    toolkit::Vector2f avoidanceMovement({ 0,0 });
+    int total = 0;
 
-
-    toolkit::Vector2f avoidanceMove({ 0,0 });
-    int nAvoid = 0;
-
-    for (auto agent : a->neighboursBoids)
+    for (auto agent : Boid::instances)
     {
-        auto diff = MathHelper::getDirection((agent->position), (a->position));
-        auto d = MathHelper::magnitude(&diff);
+        float d = MathHelper::distance(agent->position, a->position);
 
-        diff[0] /= d;
-        diff[1] /= d;
+        if (agent != a && d < a->boidInfo.avoidancePerceptionRadius)
+        {
+            auto diff = a->position;
+            diff -= agent->position;
 
-        avoidanceMove[0] += agent->position[0];
-        avoidanceMove[1] += agent->position[1];
+            diff /= powf(d, 2);
+
+            avoidanceMovement += diff;
+            total++;
+        }
     }
 
+    if (total > 0)
+    {
+        avoidanceMovement /= total;
+        MathHelper::setMag(avoidanceMovement, a->boidInfo.maxSpeed);
+        avoidanceMovement -= a->boidInfo.velocity;
+        MathHelper::limit(avoidanceMovement, a->boidInfo.maxForce);
 
-    avoidanceMove[0] /= a->neighboursBoids.size();
-    avoidanceMove[1] /= a->neighboursBoids.size();
+    }
 
-
-
-    return avoidanceMove;
+    return avoidanceMovement;
 
 
 }

@@ -101,6 +101,36 @@
                 return (*this);
             }
 
+            Vector & operator -= (const Vector & other)
+            {
+                for (size_t index = 0; index < DIMENSION; index++)
+                {
+                    this->coordinates ()[index] -= other.coordinates ()[index];
+                }
+
+                return (*this);
+            }
+
+            Vector& operator /= (const float & other)
+            {
+                for (size_t index = 0; index < DIMENSION; index++)
+                {
+                    this->coordinates()[index] /= other;
+                }
+
+                return (*this);
+            }
+
+            Vector& operator *= (const float& other)
+            {
+                for (size_t index = 0; index < DIMENSION; index++)
+                {
+                    this->coordinates()[index] *= other;
+                }
+
+                return (*this);
+            }
+
         };
 
         template< typename NUMERIC_TYPE >

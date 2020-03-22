@@ -1,24 +1,31 @@
 #include "../headers/Alignment.hpp"
 #include "../headers/Boid.hpp"
 
-toolkit::Vector2f FlockingSystem::Alignment::calculateMove(Boid * a)
+toolkit::Vector2f FlockingSystem::Alignment::calculateMove(Boid* a)
 {
 
-    if (a->neighboursBoids.size() == 0)
-        return toolkit::Vector2f({ 0,0 });
-
-
     toolkit::Vector2f alignmentMove({ 0,0 });
+    int total = 0;
 
-    for (auto agent : a->neighboursBoids)
+    for (auto agent : Boid::instances)
     {
-        alignmentMove[0] += agent->direction[0];
-        alignmentMove[1] += agent->direction[1];
+        float d = MathHelper::distance(agent->position, a->position);
+
+        if (agent != a && d < a->boidInfo.alignPerceptionRadius)
+        {
+            alignmentMove += agent->boidInfo.velocity;
+            total++;
+        }
     }
 
-    alignmentMove[0] /= a->neighboursBoids.size();
-    alignmentMove[1] /= a->neighboursBoids.size();
+    if (total > 0)
+    {
+        alignmentMove /= total;
+        MathHelper::setMag(alignmentMove, a->boidInfo.maxSpeed);
+        alignmentMove -= a->boidInfo.velocity;
+        MathHelper::limit(alignmentMove, a->boidInfo.maxForce);
 
+    }
 
     return alignmentMove;
 
