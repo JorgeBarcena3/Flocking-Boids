@@ -23,7 +23,7 @@ namespace FlockingSystem
 
 
         // Inherited via FlockBehavior
-        virtual void calculateMove(Boid * a) override;
+        virtual toolkit::Vector2f calculateMove(Boid * a) override;
 
     };
 

@@ -8,8 +8,8 @@
 *                                                                             *
 \* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#ifndef COESHION_HEADER
-#define COESHION_HEADER
+#ifndef AVOIDANCE_HEADER
+#define AVOIDANCE_HEADER
 
 #include "FlockBehavior.hpp"
 
@@ -23,7 +23,7 @@ namespace FlockingSystem
 
 
         // Inherited via FlockBehavior
-        virtual void calculateMove(Boid * a) override;
+        virtual toolkit::Vector2f calculateMove(Boid * a) override;
 
     };
 

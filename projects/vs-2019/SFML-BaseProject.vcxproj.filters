@@ -72,6 +72,9 @@
     <ClInclude Include="..\..\code\headers\ComponentBehavior.hpp">
       <Filter>Headers\Flock Behavior</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\code\headers\MathHelper.hpp">
+      <Filter>Headers\tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\code\source\Alignment.cpp">
@@ -92,5 +95,6 @@
     <ClCompile Include="..\..\code\source\Model2D.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\code\headers\ComponentBehavior.cpp" />
   </ItemGroup>
 </Project>

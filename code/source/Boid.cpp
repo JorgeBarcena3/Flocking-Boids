@@ -10,6 +10,7 @@
 \* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "../headers/Boid.hpp"
+#include "../headers/MathHelper.hpp"
 
 #define PI   3.1415
 #define PI2  2 * PI
@@ -28,7 +29,9 @@ std::vector<Boid*> Boid::instances = {};
 FlockingSystem::Boid::Boid(
     float _radius,
     sf::Color _color,
-    Vector2f _position,
+    Vector2f _direction,
+    Vector2f _startPosition,
+    float _visibleRadius,
     float _translationSpeed,
     int _vertex) : Model2D({ }), Behavior(this)
 {
@@ -38,8 +41,14 @@ FlockingSystem::Boid::Boid(
     vertex = _vertex;                          // Numero de vertices
     set_color(_color);                         // Color que adopta
     translationSpeed = _translationSpeed;      // Velocidad de translacion
-    set_position(_position[0], _position[1]);  // Posicion actual 
+    set_position(_startPosition[0], _startPosition[1]);
+    visibleRadius = radius + _visibleRadius;
+    direction = _direction;
     setListOfPolygons();                       // Creamos la esfera basandonos en los vertices
+
+    radiusInfo.squareMaxSpeed = _translationSpeed * _translationSpeed;
+    radiusInfo.squareNeighborRadius = visibleRadius * visibleRadius;
+    radiusInfo.squareAvoidanceRadius = radiusInfo.squareNeighborRadius * 2 * 2;
 
 
     /* Inicializamos los vertices */
@@ -63,16 +72,16 @@ FlockingSystem::Boid::Boid(
 void Boid::setListOfPolygons()
 {
 
-	float vertexAngle  = (float)( PI2 / vertex );       // Division de la esfera en X radianes
-           spherePoints = {};                           // Puntos de la esfera
+    float vertexAngle = (float)(PI2 / vertex);       // Division de la esfera en X radianes
+    spherePoints = {};                           // Puntos de la esfera
 
-	for (int i = 0; i < vertex; ++i)
-	{
-		float x = cosf(vertexAngle * i) * radius;
-		float y = sinf(vertexAngle * i) * radius;
-		spherePoints.push_back(Point3f({ x, y, 1 }));
+    for (int i = 0; i < vertex; ++i)
+    {
+        float x = cosf(vertexAngle * i) * radius;
+        float y = sinf(vertexAngle * i) * radius;
+        spherePoints.push_back(Point3f({ x, y, 1 }));
 
-	}
+    }
 
 };
 
@@ -81,11 +90,89 @@ void Boid::setListOfPolygons()
 */
 void Boid::update(float delta)
 {
-    Behavior.update();
-    set_position(position[0] + translationSpeed, position[1]);
-	Model2D::update(delta);
+    //fixLimits();
+
+    getAgentsInRange();
+
+    toolkit::Vector2f move = Behavior.calculateMove();
+
+    move[0] *= translationSpeed;
+    move[1] *= translationSpeed;
+
+    if (MathHelper::sqrtMagnitude(move) > radiusInfo.squareMaxSpeed)
+    {
+        MathHelper::normalize(&move);
+        move[0] *= translationSpeed;
+        move[1] *= translationSpeed;
+    }
+
+    direction += move;
+    MathHelper::normalize(&direction);
+
+    direction[0] *= translationSpeed;
+    direction[1] *= translationSpeed;
+
+    /*  agent.Move(move);
+      MathHelper::normalize(&direction);*/
+
+
+    set_position(position[0] + direction[0], position[1] + direction[1]);
+
+    Model2D::update(delta);
 };
 
+void Boid::fixLimits()
+{
+    if (position[0] < 0)
+    {
+        position[0] = 900;
+    }
+    else if (position[0] > 900)
+    {
+        position[0] = 0;
+
+    }
+
+    if (position[1] < 0)
+    {
+        position[1] = 600;
+    }
+    else if (position[1] > 600)
+    {
+        position[1] = 0;
+    }
+}
+
+void Boid::getAgentsInRange()
+{
+
+    neighboursBoids.clear();
+
+    for (Boid* agent : Boid::instances)
+    {
+
+        if (agent != this)
+        {
+            Vector2f agentFixedPosition = (*agent).position;
+           
+
+            float distance = MathHelper::distance(this->position, agentFixedPosition);
+
+            if (distance < visibleRadius)
+            {
+                neighboursBoids.push_back(agent);
+            }
+
+        }
 
 
+
+    }
+
+    int r = 12 * neighboursBoids.size();
+    set_color(sf::Color(255, 0, 0, 255));
+
+
+
+}
 

@@ -23,10 +23,19 @@ using namespace toolkit;
 namespace FlockingSystem
 {
 
+    struct RadiusInfo
+    {
+        float squareMaxSpeed;
+        float squareNeighborRadius;
+        float squareAvoidanceRadius;
+    };
+
     class Boid : public Model2D
     {
 
     public:
+
+        RadiusInfo                   radiusInfo;
 
         ComponentBehavior            Behavior;               // Determina como se comporta el Boid
 
@@ -40,6 +49,12 @@ namespace FlockingSystem
                                                                             
         float                         translationSpeed;       //Velocidad de translacion
 
+        Vector2f                       direction;              // Direccion que tiene el boid
+
+        float                         visibleRadius;           // Radio que determina lo que ve y lo que no. Se aplica al radio que tiene ya
+        
+        std::vector<Boid *>           neighboursBoids;           // Radio que determina lo que ve y lo que no. Se aplica al radio que tiene ya
+
 
     public:
 
@@ -47,12 +62,14 @@ namespace FlockingSystem
         * Contructor que recibe los parametros de como va a ser el boid en cuestion
         */
         Boid(
-            float             _radius                                                  ,//Radio
-            sf::Color         _color                                                   ,//Color
-            Vector2f          _position                                                ,// Position
-            float             _translationSpeed        = 1                             ,//Velocidad de translacion
-            int               _vertex                  = 16                            )//Numero de vertices
-        ;      
+            float _radius, 
+            sf::Color _color, 
+            Vector2f _direction, 
+            Vector2f _startPosition,
+            float _visibleRadius, 
+            float _translationSpeed,
+            int _vertex = 16);
+
 
         /*
         * Divide la esfera en vertices de igual distancia
@@ -62,7 +79,12 @@ namespace FlockingSystem
         /*
         * Busca la siguiente posicion del Boid
         */
-        void update(float delta); 
+        void update(float delta);
+
+        void fixLimits();
+        void getAgentsInRange();
+       
+
         
 
         void set_translationSpeed(float _speed)
@@ -93,6 +115,7 @@ namespace FlockingSystem
                 instances[i]->render(renderer);
             }
         };
+
 
     };
 

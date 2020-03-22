@@ -11,6 +11,7 @@
 #ifndef FLOCKBEHAVIOR_HEADER
 #define FLOCKBEHAVIOR_HEADER
 
+#include "Vector.hpp"
 
 namespace FlockingSystem
 {
@@ -22,7 +23,7 @@ namespace FlockingSystem
 
     public:
 
-        virtual void calculateMove(Boid * a) = 0;
+        virtual toolkit::Vector2f calculateMove(Boid * a) = 0;
     };
 
 }

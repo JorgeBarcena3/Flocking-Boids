@@ -12,6 +12,7 @@
 #define COMPONENTBEHAVIOR_HEADER
 
 #include "FlockBehavior.hpp"
+#include "MathHelper.hpp"
 #include <vector>
 
 namespace FlockingSystem
@@ -24,23 +25,33 @@ namespace FlockingSystem
 
         Boid * agent;
 
-        std::vector<FlockBehavior> behaviors;
+        std::vector<FlockBehavior * > behaviors;
+
+        std::vector<float> weights;
 
     public:
 
-        ComponentBehavior(Boid * _agent) : agent(_agent)
-        {
-                
-        }
+        ComponentBehavior(Boid* _agent);
 
 
-        void update()
+        toolkit::Vector2f calculateMove()
         {
+
+            toolkit::Vector2f move({ 0,0 });
 
             for (size_t i = 0; i < behaviors.size(); i++)
             {
-                behaviors[i].calculateMove(agent);
+                toolkit::Vector2f partialMove = behaviors[i]->calculateMove(agent);
+
+                partialMove[0] *= weights[i];
+                partialMove[1] *= weights[i];
+
+                move[0] += partialMove[0];
+                move[1] += partialMove[1];
+
             }
+
+            return move;
 
         }
 
