@@ -8,38 +8,22 @@
 *                                                                             *
 \* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#ifndef COMPONENTBEHAVIOR_HEADER
-#define COMPONENTBEHAVIOR_HEADER
+#ifndef AVOIDOBSTACLES_HEADER
+#define AVOIDOBSTACLES_HEADER
 
 #include "FlockBehavior.hpp"
-#include "MathHelper.hpp"
-#include <vector>
-#include "AvoidObstacles.hpp"
 
 namespace FlockingSystem
 {
-    class Boid;
 
-    class ComponentBehavior
+    class AvoidObstacles : public FlockBehavior
     {
-
-    private:
-
-        FlockingSystem::Boid * agent;
-
-        std::vector<FlockBehavior * > behaviors;
-
-        AvoidObstacles * avoidObstacleBehaviors;
-
-        std::vector<float> weights;
 
     public:
 
-        ComponentBehavior(FlockingSystem::Boid* _agent);
 
-        ~ComponentBehavior();
-
-        void calculateMove();
+        // Inherited via FlockBehavior
+        virtual toolkit::Vector2f calculateMove(Boid* a) override;
 
     };
 

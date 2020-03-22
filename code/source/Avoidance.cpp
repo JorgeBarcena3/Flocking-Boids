@@ -6,7 +6,7 @@ toolkit::Vector2f FlockingSystem::Avoidance::calculateMove(Boid* a)
 {
 
     toolkit::Vector2f avoidanceMovement({ 0,0 });
-    int total = 0;
+    float total = 0;
 
     for (auto agent : Boid::instances)
     {

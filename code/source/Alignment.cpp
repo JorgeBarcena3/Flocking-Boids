@@ -5,7 +5,7 @@ toolkit::Vector2f FlockingSystem::Alignment::calculateMove(Boid* a)
 {
 
     toolkit::Vector2f alignmentMove({ 0,0 });
-    int total = 0;
+    float total = 0;
 
     for (auto agent : Boid::instances)
     {

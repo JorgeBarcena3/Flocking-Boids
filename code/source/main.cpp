@@ -37,7 +37,7 @@ int main()
 
     std::vector<Boid*> agents;
 
-    BoidInfo infoBoid(25, 50, 24, 0.2, 5);
+    BoidInfo infoBoid(25, 50, 24, 0.2f, 5);
 
     for (size_t i = 0; i < 200; i++)
     {

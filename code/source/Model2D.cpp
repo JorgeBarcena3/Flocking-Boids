@@ -27,7 +27,7 @@ namespace FlockingSystem
         Translation2f    translation(position);
         Transformation2f transform(translation * rotation * scale);
 
-        int number_of_vertices = local_vertices.size();
+        int number_of_vertices = (int)local_vertices.size();
 
         for (size_t i = 0; i < number_of_vertices; ++i)
         {

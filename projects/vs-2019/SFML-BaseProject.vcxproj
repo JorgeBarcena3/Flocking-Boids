@@ -90,6 +90,7 @@
     <ClInclude Include="..\..\code\headers\Algorithms.hpp" />
     <ClInclude Include="..\..\code\headers\Alignment.hpp" />
     <ClInclude Include="..\..\code\headers\Avoidance.hpp" />
+    <ClInclude Include="..\..\code\headers\AvoidObstacles.hpp" />
     <ClInclude Include="..\..\code\headers\Coeshion.hpp" />
     <ClInclude Include="..\..\code\headers\ComponentBehavior.hpp" />
     <ClInclude Include="..\..\code\headers\Coordinates.hpp" />
@@ -108,11 +109,12 @@
     <ClInclude Include="..\..\code\headers\Vector.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\code\headers\ComponentBehavior.cpp" />
     <ClCompile Include="..\..\code\source\Alignment.cpp" />
     <ClCompile Include="..\..\code\source\Avoidance.cpp" />
+    <ClCompile Include="..\..\code\source\AvoidObstacles.cpp" />
     <ClCompile Include="..\..\code\source\Boid.cpp" />
     <ClCompile Include="..\..\code\source\Coeshion.cpp" />
+    <ClCompile Include="..\..\code\source\ComponentBehavior.cpp" />
     <ClCompile Include="..\..\code\source\main.cpp" />
     <ClCompile Include="..\..\code\source\Model2D.cpp" />
   </ItemGroup>

@@ -30,7 +30,7 @@ FlockingSystem::Boid::Boid(
     float             _radius,
     sf::Color         _color,
     Vector2f          _startPosition,
-    toolkit::Vector2i _Window_size,
+    toolkit::Vector2f _Window_size,
     BoidInfo          _info,
     int               _vertex) : Model2D({ }), boidInfo(_info)
 {
@@ -63,6 +63,7 @@ FlockingSystem::Boid::Boid(
 
 
 }
+
 
 void Boid::setListOfPolygons()
 {

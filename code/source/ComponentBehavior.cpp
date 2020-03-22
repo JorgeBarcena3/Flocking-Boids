@@ -1,8 +1,8 @@
-#include "ComponentBehavior.hpp"
-#include "Coeshion.hpp"
-#include "Avoidance.hpp"
-#include "Alignment.hpp"
-#include "Boid.hpp"
+#include "../headers/ComponentBehavior.hpp"
+#include "../headers/Coeshion.hpp"
+#include "../headers/Avoidance.hpp"
+#include "../headers/Alignment.hpp"
+#include "../headers/Boid.hpp"
 
 FlockingSystem::ComponentBehavior::ComponentBehavior(Boid* _agent) : agent(_agent)
 {

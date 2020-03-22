@@ -23,6 +23,10 @@ namespace FlockingSystem
     public:
 
         virtual toolkit::Vector2f calculateMove(Boid * a) = 0;
+
+        ~FlockBehavior()
+        {}
+
     };
 
 }

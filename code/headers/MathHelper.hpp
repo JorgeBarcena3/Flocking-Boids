@@ -64,18 +64,13 @@ namespace FlockingSystem
         static float sqrtMagnitude(toolkit::Vector2f A)
         {
            
-            return sqrt( magnitude(&A) );
+            return sqrtf( magnitude(&A) );
         }
         
 
         static float generateRandom(double M, double N)
         {
-            return M + (rand() / (RAND_MAX / (N - M)));
-        }
-
-        static float generateRandom(int M, int N)
-        {
-            return M + (rand() / (RAND_MAX / (N - M)));
+            return (float)(M + (rand() / (RAND_MAX / (N - M))));
         }
         
         static void setMag(toolkit::Vector2f& vec, float newMag)

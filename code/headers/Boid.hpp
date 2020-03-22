@@ -89,7 +89,7 @@ namespace FlockingSystem
                                       
         std::vector< Point3f >        spherePoints;    // Vertices de la esfera en base con centro en (0,0)
                                                                                  
-        toolkit::Vector2i             window_size;     // Tamaño de la pantalla
+        toolkit::Vector2f             window_size;     // Tamaño de la pantalla
 
     public:
 
@@ -100,7 +100,7 @@ namespace FlockingSystem
             float             _radius, 
             sf::Color         _color, 
             Vector2f          _startPosition,
-            toolkit::Vector2i _Window_size,
+            toolkit::Vector2f _Window_size,
             BoidInfo          _info,
             int               _vertex = 16
         );
