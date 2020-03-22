@@ -48,7 +48,7 @@ namespace FlockingSystem
             return magnitude(&direction);
         }
 
-        static toolkit::Vector2f getDirection(toolkit::Vector2f A, toolkit::Vector2f B)
+        static toolkit::Vector2f getDirection(toolkit::Vector2f& A, toolkit::Vector2f& B)
         {
             toolkit::Vector2f direction(
                 {

@@ -21,6 +21,11 @@ namespace FlockingSystem
 
     public:
 
+        float obstacleRadius = 50;
+
+        toolkit::Vector2f obstaclePosition;
+        
+        bool obstacleInScreen();
 
         // Inherited via FlockBehavior
         virtual toolkit::Vector2f calculateMove(Boid* a) override;

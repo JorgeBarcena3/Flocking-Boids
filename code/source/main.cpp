@@ -28,6 +28,9 @@ int main()
 {
     RenderWindow window(VideoMode(WIDTH, HEIGHT), "Flocking Boids - Jorge Barcena", sf::Style::Default, ContextSettings(32));
 
+    Boid::window = &window;
+    Boid::window_size = toolkit::Vector2f({ WIDTH, HEIGHT });
+
     window.setVerticalSyncEnabled(true);
 
     bool running = true;
@@ -46,7 +49,6 @@ int main()
             6,
             sf::Color::White,
             { MathHelper::generateRandom(0, WIDTH), MathHelper::generateRandom(0, HEIGHT) },
-            { WIDTH, HEIGHT },
             infoBoid,
             3
         )

@@ -37,8 +37,6 @@ namespace FlockingSystem
 
         ComponentBehavior(FlockingSystem::Boid* _agent);
 
-        ~ComponentBehavior();
-
         void calculateMove();
 
     };

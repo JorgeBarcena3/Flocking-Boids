@@ -71,7 +71,11 @@ namespace FlockingSystem
 
     public:
 
-        static std::vector<Boid*>    instances;        //Instancias de los boids
+        static std::vector<Boid*>    instances;           //Instancias de los boids
+
+        static sf::RenderWindow *    window;              // Instancia de la ventana de render
+
+        static toolkit::Vector2f     window_size; // Tamaño de la pantalla
 
 
     public:
@@ -88,8 +92,6 @@ namespace FlockingSystem
         int                           vertex;          // Numero de vertices
                                       
         std::vector< Point3f >        spherePoints;    // Vertices de la esfera en base con centro en (0,0)
-                                                                                 
-        toolkit::Vector2f             window_size;     // Tamaño de la pantalla
 
     public:
 
@@ -100,7 +102,6 @@ namespace FlockingSystem
             float             _radius, 
             sf::Color         _color, 
             Vector2f          _startPosition,
-            toolkit::Vector2f _Window_size,
             BoidInfo          _info,
             int               _vertex = 16
         );

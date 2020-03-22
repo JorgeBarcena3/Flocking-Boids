@@ -23,6 +23,10 @@ using namespace sf;
 //Inicializacion de la lista de boids
 std::vector<Boid*> Boid::instances = {};
 
+sf::RenderWindow* Boid::window = nullptr;
+
+toolkit::Vector2f Boid::window_size = toolkit::Vector2f({0,0});
+
 /*
 * Divide la esfera en vertices de igual distancia
 */
@@ -30,7 +34,6 @@ FlockingSystem::Boid::Boid(
     float             _radius,
     sf::Color         _color,
     Vector2f          _startPosition,
-    toolkit::Vector2f _Window_size,
     BoidInfo          _info,
     int               _vertex) : Model2D({ }), boidInfo(_info)
 {
@@ -40,7 +43,6 @@ FlockingSystem::Boid::Boid(
     vertex = _vertex;                                    // Numero de vertices
     set_color(_color);                                   // Color que adopta
     set_position(_startPosition[0], _startPosition[1]);  // Posicionamos el boid en esa posicion
-    window_size = _Window_size;                          // Tamaño de la pantalla
     setListOfPolygons();                                 // Creamos la esfera basandonos en los vertices
 
 
@@ -107,9 +109,9 @@ void Boid::limits()
 {
     if (position[0] < 0)
     {
-        position[0] = window_size[0];
+        position[0] = Boid::window_size[0];
     }
-    else if (position[0] > window_size[0])
+    else if (position[0] > Boid::window_size[0])
     {
         position[0] = 0;
 
@@ -117,9 +119,9 @@ void Boid::limits()
 
     if (position[1] < 0)
     {
-        position[1] = window_size[1];
+        position[1] = Boid::window_size[1];
     }
-    else if (position[1] > window_size[1])
+    else if (position[1] > Boid::window_size[1])
     {
         position[1] = 0;
     }

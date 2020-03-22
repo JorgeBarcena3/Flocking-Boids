@@ -11,10 +11,12 @@ FlockingSystem::ComponentBehavior::ComponentBehavior(Boid* _agent) : agent(_agen
     weights.push_back(1.5);
 
     behaviors.push_back(new FlockingSystem::Coeshion());
-    weights.push_back(1);   
+    weights.push_back(1);
 
     behaviors.push_back(new FlockingSystem::Avoidance());
     weights.push_back(2.5);
+
+    avoidObstacleBehaviors = new FlockingSystem::AvoidObstacles();
 
 
 }
@@ -36,5 +38,10 @@ void FlockingSystem::ComponentBehavior::calculateMove()
         agent->boidInfo.aceleration += behaviorsPartialMove[i];
 
     }
+
+    if (avoidObstacleBehaviors->obstacleInScreen())
+        toolkit::Vector2f avoid = avoidObstacleBehaviors->calculateMove(agent);
+
+
 
 }
