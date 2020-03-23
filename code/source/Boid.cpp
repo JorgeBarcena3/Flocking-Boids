@@ -97,9 +97,10 @@ void FlockingSystem::Boid::render(sf::RenderWindow& renderer)
 
     sf::CircleShape circle;
     circle.setFillColor(polygonColor);
-    circle.setRadius(6);
+    circle.setRadius(radius);
     circle.setPosition(position[0], position[1]);
 
+   
     renderer.draw(circle);
 
 
