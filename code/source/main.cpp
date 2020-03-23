@@ -15,6 +15,8 @@
 #include <stdlib.h>     /* srand, rand */
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <TGUI/TGUI.hpp>
+
 
 #define WIDTH  1024
 #define HEIGHT 720
@@ -23,10 +25,49 @@
 using namespace sf;
 using namespace FlockingSystem;
 
+void signalHandler(tgui::Widget::Ptr widget, const std::string& signalName)
+{
+    auto name = widget->getWidgetName();
+    auto id = std::stoi(name.substring(7).toAnsiString());
+    ComponentBehavior::weights[id] = widget->cast<tgui::Slider>()->getValue();
+
+}
+
+
+void setWidgets(std::vector<std::shared_ptr<tgui::Widget>>& sliderWidget, tgui::Gui& gui)
+{
+
+    float n_widget = (float)ComponentBehavior::weights.size();
+
+    float spacing = WIDTH / (n_widget + 1);
+    float min_spacing = spacing / (n_widget + 1);
+
+    for (size_t i = 0; i < n_widget; i++)
+    {
+        auto slider = tgui::Slider::create(0.1f, 3.f);
+
+        slider->setPosition((min_spacing * (i + 1)) + (spacing * i), HEIGHT - (HEIGHT * 0.1));
+        slider->setSize(spacing, spacing * 0.1);
+        slider->setStep(0.1f);
+        slider->setValue(ComponentBehavior::weights[i]);
+        slider->connect("ValueChanged", signalHandler);
+
+        sliderWidget.push_back(slider);
+        gui.add(sliderWidget[i], ("Slider_" + std::to_string(i)));
+
+    }
+
+}
+
 
 int main()
 {
     RenderWindow window(VideoMode(WIDTH, HEIGHT), "Flocking Boids - Jorge Barcena", sf::Style::Default, ContextSettings(32));
+    tgui::Gui gui{ window }; // Create the gui and attach it to the window
+
+    std::vector<tgui::Widget::Ptr> sliderWidget;
+    setWidgets(sliderWidget, gui);
+
 
     Boid::window = &window;
     Boid::window_size = toolkit::Vector2f({ WIDTH, HEIGHT });
@@ -56,7 +97,6 @@ int main()
 
     }
 
-
     do
     {
         // Process window events:
@@ -69,6 +109,9 @@ int main()
             {
                 running = false;
             }
+
+            gui.handleEvent(event); // Pass the event to the widgets
+
         }
 
         Boid::Update(0);
@@ -78,6 +121,8 @@ int main()
         window.clear();
 
         Boid::Render(window);
+        gui.draw(); // Draw all widgets
+
 
         window.display();
 
@@ -90,4 +135,3 @@ int main()
 
     return EXIT_SUCCESS;
 }
-

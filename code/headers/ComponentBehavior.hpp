@@ -23,6 +23,10 @@ namespace FlockingSystem
     class ComponentBehavior
     {
 
+    public:
+
+        static std::vector<float> weights;
+
     private:
 
         FlockingSystem::Boid * agent;
@@ -30,8 +34,6 @@ namespace FlockingSystem
         std::vector<FlockBehavior * > behaviors;
 
         AvoidObstacles * avoidObstacleBehaviors;
-
-        std::vector<float> weights;
 
     public:
 

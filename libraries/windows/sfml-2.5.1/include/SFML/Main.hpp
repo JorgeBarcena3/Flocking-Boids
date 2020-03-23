@@ -41,3 +41,5 @@
 
 
 #endif // SFML_MAIN_HPP
+
+void setWidgets(std::vector<std::shared_ptr<tgui::Slider>>& sliderWidget, tgui::Gui& gui);

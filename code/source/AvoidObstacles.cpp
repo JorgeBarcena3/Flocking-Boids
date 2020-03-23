@@ -14,7 +14,7 @@ bool FlockingSystem::AvoidObstacles::obstacleInScreen()
 
     if (
         position.x > 0 && position.x < Boid::window_size[0] &&
-        position.y > 0 && position.y < Boid::window_size[1]
+        position.y > 0 && position.y < Boid::window_size[1] - (Boid::window_size[1] * 0.15f)
         )
     {
         obstaclePosition = toolkit::Vector2f({ position.x , position.y });

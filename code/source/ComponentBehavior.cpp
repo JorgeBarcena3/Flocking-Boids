@@ -4,17 +4,18 @@
 #include "../headers/Alignment.hpp"
 #include "../headers/Boid.hpp"
 
+
+std::vector<float> FlockingSystem::ComponentBehavior::weights = {1.5f, 1.0f, 2.5f};
+
+
 FlockingSystem::ComponentBehavior::ComponentBehavior(Boid* _agent) : agent(_agent)
 {
 
     behaviors.push_back(new FlockingSystem::Alignment());
-    weights.push_back(1.5);
 
     behaviors.push_back(new FlockingSystem::Coeshion());
-    weights.push_back(1);
 
     behaviors.push_back(new FlockingSystem::Avoidance());
-    weights.push_back(2.5);
 
     avoidObstacleBehaviors = new FlockingSystem::AvoidObstacles();
 
@@ -33,7 +34,7 @@ void FlockingSystem::ComponentBehavior::calculateMove()
 
     for (size_t i = 0; i < behaviorsPartialMove.size(); i++)
     {
-        behaviorsPartialMove[i] *= weights[i];
+        behaviorsPartialMove[i] *= FlockingSystem::ComponentBehavior::weights[i];
 
         agent->boidInfo.aceleration += behaviorsPartialMove[i];
 
