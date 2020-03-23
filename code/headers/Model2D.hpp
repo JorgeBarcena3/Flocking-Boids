@@ -35,11 +35,7 @@ namespace FlockingSystem
 
         typedef std::vector< Point3f > Vertex_Buffer;
 
-        // Buffers de vértices:
-
-        Vertex_Buffer local_vertices;
-        Vertex_Buffer transformed_vertices;
-
+       
         // Atributos de transformación:
 
         Vector2f	  position;
@@ -49,42 +45,17 @@ namespace FlockingSystem
         // Atributos de animación:
 
         sf::Color     polygonColor;
-        sf::Texture*  tx;
 
 
 
     public:
 
-        Model2D(const std::vector< Point3f >& points)
+        Model2D()
         {
-            local_vertices.reserve(points.size());
-
-            for (auto& point : points)
-            {
-                local_vertices.push_back(point);
-            }
-
-            transformed_vertices.resize(local_vertices.size());
-
-            set_position(0, 0);
-            set_angle(0);
-            set_scale(1);
-
-            set_color(sf::Color::Red);
-
-                           
+           
 
         }
 
-        void setTexture(const char* path)
-        {
-            tx = new sf::Texture();
-
-            if (!tx->loadFromFile(path)) {
-                delete tx;
-                tx = nullptr;
-            }
-        }
 
         void set_position(float x, float y)
         {
@@ -110,7 +81,7 @@ namespace FlockingSystem
         {
         }
 
-        void render(sf::RenderWindow& renderer);
+        void render();
 
     };
 

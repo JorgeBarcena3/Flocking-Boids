@@ -20,44 +20,8 @@ using namespace toolkit;
 namespace FlockingSystem
 {
 
-    void Model2D::render(sf::RenderWindow& renderer)
+    void Model2D::render()
     {
-        Scaling2f        scale(scale);
-        Rotation2f       rotation(angle);
-        Translation2f    translation(position);
-        Transformation2f transform(translation * rotation * scale);
-
-        int number_of_vertices = (int)local_vertices.size();
-
-        for (size_t i = 0; i < number_of_vertices; ++i)
-        {
-            transformed_vertices[i] = Matrix33f(transform) * Matrix31f(local_vertices[i]);
-        }
-
-        ConvexShape sfml_polygon;
-
-        sfml_polygon.setPointCount(number_of_vertices);
-
-        if (tx != nullptr)
-            sfml_polygon.setTexture(tx);
-        else
-            sfml_polygon.setFillColor(polygonColor);
-
-
-        for (int i = 0; i < number_of_vertices; i++)
-        {
-            sfml_polygon.setPoint
-            (
-                i,
-                sf::Vector2f
-                (
-                    transformed_vertices[i][0],
-                    transformed_vertices[i][1]
-                )
-            );
-        }
-
-        renderer.draw(sfml_polygon);
     }
 
 

@@ -43,45 +43,10 @@ FlockingSystem::Boid::Boid(
     vertex = _vertex;                                    // Numero de vertices
     set_color(_color);                                   // Color que adopta
     set_position(_startPosition[0], _startPosition[1]);  // Posicionamos el boid en esa posicion
-    setListOfPolygons();                                 // Creamos la esfera basandonos en los vertices
-
-
-    /* Inicializamos los vertices */
-
-    local_vertices.clear();
-    transformed_vertices.clear();
-
-    local_vertices.reserve(spherePoints.size());
-
-    for (auto& point : spherePoints)
-    {
-        local_vertices.push_back(point);
-    }
-
-    transformed_vertices.resize(local_vertices.size());
-
     Boid::instances.push_back(this);                     //Añadimos el objeto a la lista de entidades
-
-
 
 }
 
-
-void Boid::setListOfPolygons()
-{
-
-    float vertexAngle = (float)(PI2 / vertex);       // Division de la esfera en X radianes
-    spherePoints = {};                           // Puntos de la esfera
-
-    for (int i = 0; i < vertex; ++i)
-    {
-        float x = cosf(vertexAngle * i) * radius;
-        float y = sinf(vertexAngle * i) * radius;
-        spherePoints.push_back(Point3f({ x, y, 1 }));
-
-    }
-
-};
 
 /*
 * Busca la siguiente posicion del Boid
@@ -125,4 +90,17 @@ void Boid::limits()
     {
         position[1] = 0;
     }
+}
+
+void FlockingSystem::Boid::render(sf::RenderWindow& renderer)
+{
+
+    sf::CircleShape circle;
+    circle.setFillColor(polygonColor);
+    circle.setRadius(6);
+    circle.setPosition(position[0], position[1]);
+
+    renderer.draw(circle);
+
+
 }

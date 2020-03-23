@@ -123,6 +123,11 @@ namespace FlockingSystem
         void limits();
 
         /*
+        * Renderizamos una esfera en la posicion
+        */
+        void render(sf::RenderWindow& renderer);
+
+        /*
         * Llama a la funcion update() de todos los Boids almacenados
         */
         static void Update(float delta)
